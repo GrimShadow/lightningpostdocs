@@ -1,0 +1,188 @@
+## Getting started
+To get started with Lightning-POST in Laravel, you'll need to install the Lightning-POST API package and authenticate your requests. Once you've completed these steps, you can start sending emails and social media updates directly from your Laravel application.
+
+## Requirements
+To use the Lightning-POST API, you'll need the following:
+- Create an API key
+- Verify your domain
+- Laravel application (_**The best web application framework in the world.** Yes we are biased_)
+
+## 1.Installation
+To install the Lightning-POST API package in your Laravel application, you can use Composer. Run the following command in your terminal:
+
+```composer Composer
+composer require lightning-post/laravel
+```
+
+## 2. Configuration
+
+### API Key
+
+Configure your `.env` file to include the `LIGHTNING_API_KEY` variable with your API key. You can find your API key in the Lightning-POST dashboard.
+
+```env .env
+LIGHTNING_API_KEY="your-api-key"
+```
+
+### Mail driver
+
+Update your `config/mail.php` file to use the Lightning-POST mail driver. Add the following configuration to the `mailers` array:
+
+```php config/mail.php
+
+'lightning-post' => [
+    'transport' => 'lightning-post',
+],
+```
+
+Update your application to now use the `lightning-post` mail driver. You can do this by updating the `MAIL_MAILER` variable in your `.env` file:
+
+```env .env
+MAIL_MAILER=lightning-post
+MAIL_FROM_ADDRESS=welcome@lightning-post.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## 3.Sending an email
+Now that we have setup Lightning-POST in your Laravel application, you can send an email in one of the following ways with a controller.
+
+### Using the `Mail` facade
+
+```php WelcomeController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Mail\Welcome;
+use App\Models\Welcome;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+class WelcomeController extends Controller
+{
+    //Send a welcome message to new user.
+
+    public function store(Request $request): RedirectResponse
+    {
+        $user = User::findOrFail($request->user_id);
+
+        // Send message...
+
+        Mail::to($request->user())->send(new WelcomeMessage($user));
+
+        return redirect('/dashboard');
+    }
+}
+
+```
+
+### Using the `Lightning-POST` facade
+
+```php WelcomeController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Mail\Welcome;
+use App\Models\Welcome;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Lightning\Laravel\Facades\Lightning;
+
+class WelcomeController extends Controller
+{
+    //Send a welcome message to new user.
+
+    public function store(Request $request): RedirectResponse
+    {
+        $user = User::findOrFail($request->user_id);
+
+        // Send message...
+
+        Lightning::emails()->send([
+            'from' => 'Welcome <welcome@lightning.dev>',
+            'to' => [$request->user()->email],
+            'subject' => 'Welcome to Lightning-POST!',
+            'html' => (new WelcomeMessage($user))->render(),
+        ])
+
+        return redirect('/dashboard');
+    }
+}
+    
+```
+
+## 4.Sending a social media post
+
+You can also send social media posts using the Lightning-POST API. Here's an example of how you can send a post to Twitter:
+
+```php SocialMediaController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Lightning\Laravel\Facades\Lightning;
+
+class SocialMediaController extends Controller
+{
+    //Send a social media post to Twitter.
+
+    public function store(Request $request): RedirectResponse
+    {
+        // Send post...
+
+        Lightning::socialMedia()->send([
+            'platform' => 'twitter',
+            'message' => 'Check out this awesome new feature on Lightning-POST!',
+            'image' => 'https://example.com/image.jpg',
+            'link' => 'https://lightning-post.com',
+        ]);
+
+        return redirect('/dashboard');
+    }
+}
+```
+
+To send a post to Facebook, you can use the following code:
+
+```php SocialMediaController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Lightning\Laravel\Facades\Lightning;
+
+class SocialMediaController extends Controller
+{
+    //Send a social media post to Facebook.
+
+    public function store(Request $request): RedirectResponse
+    {
+        // Send post...
+
+        Lightning::socialMedia()->send([
+            'platform' => 'facebook',
+            'message' => 'Check out this awesome new feature on Lightning-POST!',
+            'image' => 'https://example.com/image.jpg',
+            'link' => 'https://lightning-post.com',
+        ]);
+
+        return redirect('/dashboard');
+    }
+}
+```
+
+
+
+## Conclusion
+
+In this guide, you learned how to get started with the Lightning-POST API, authenticate your requests, and send emails and social media updates. With this knowledge, you can now integrate Lightning-POST into your Laravel applications and streamline your marketing and communication efforts. If you have any questions or need further assistance, please don't hesitate to reach out to our support team. We're here to help you succeed!

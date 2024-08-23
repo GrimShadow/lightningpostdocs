@@ -1,0 +1,120 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Lightning-POST",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#f59e0b",
+    "light": "#f59e0b",
+    "dark": "#fbbf24",
+    "anchors": {
+      "from": "#f59e0b",
+      "to": "#b45309"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@lightning-post.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://dashboard.mintlify.com"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://mintlify.com/docs"
+    },
+    {
+      "name": "API Documentation",
+      "icon": "slack",
+      "url": "https://mintlify.com/community"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://mintlify.com/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "dashboard"
+      ]
+    },
+    {
+      "group": "Mail",
+      "pages": [
+        "mail/introduction"
+      ]
+    },
+    {
+      "group": "Contact Hub",
+      "pages": [
+        "contacthub/introduction",
+        "contacthub/contacts",
+        "contacthub/groups"
+      ]
+    },
+    {
+      "group": "Composer",
+      "pages": [
+        "composer/introduction",
+            {
+                "group": "Composer",
+                "pages": [
+                  "composer/email",
+                  "composer/posts",
+                  "composer/survey",
+                  "composer/signup"
+                ]
+            }
+      ]
+    },
+    {
+      "group": "Analytics",
+      "pages": [
+        "analytics/introduction"
+      ]
+    },
+    {
+      "group": "Accounts",
+      "pages": [
+        "accounts/introduction"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "api-reference/laravel/laravel",
+        "api-reference/nodejs/nodejs",
+        "api-reference/python/python"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/mintlify",
+    "github": "https://github.com/mintlify",
+    "linkedin": "https://www.linkedin.com/company/mintsearch"
+  }
+}
